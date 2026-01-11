@@ -1,0 +1,105 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<!-- SECTION: HERO -->
+<section id="home" class="section section-hero hero-hero" data-aos="fade" style="background-image: url('{{ url_for('static', filename='uploads/kira_nikita_hat.jpg') }}')">
+  <div class="hero-overlay"></div>
+  <div class="container hero text-center">
+    <h1 class="display-4">{{ couple.groom }} &amp; {{ couple.bride }}</h1>
+    <p class="lead">{{ date }} — Приглашаем вас разделить с нами этот день</p>
+    <div class="mt-4">
+      <a class="btn btn-light btn-lg me-2" href="#details">Детали</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: ABOUT / OPENING -->
+<section id="about" class="section section-about" data-aos="fade-up">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-12">
+        <h2>Мы будем рады видеть вас</h2>
+        <p class="muted">Празднование пройдет в уютной загородной локации.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: DETAILS -->
+<section id="details" class="section section-details">
+  <div class="container py-5">
+  <h2 data-aos="fade-up">Детали мероприятия</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <ul class="list-unstyled">
+          <li><strong>Дата:</strong> {{ date }}</li>
+          <li><strong>Время:</strong> {{ details.time }}</li>
+          <li><strong>Место:</strong> {{ details.venue_name }}</li>
+          <li class="mt-2">
+            <a class="btn btn-sm btn-outline-danger me-2" href="{{ details.yandex_link }}" target="_blank" rel="noopener">Открыть в Яндекс.Картах</a>
+            <a class="btn btn-sm btn-outline-primary me-2" href="{{ details.google_link }}" target="_blank" rel="noopener">Открыть в Google.Картах</a>
+            <a class="btn btn-sm btn-outline-secondary" href="{{ details.two_gis_link }}" target="_blank" rel="noopener">Открыть в 2GIS</a>
+          </li>
+          <li><strong>Адрес:</strong> {{ details.address }}</li>
+          <li><strong>Парковка:</strong> {{ details.parking }}</li>
+          <li><strong>Дресс-код:</strong> {{ details.dress_code }}</li>
+          <li><strong>Примечания:</strong> {{ details.notes }}</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h5>Карта</h5>
+        <div class="map-responsive mb-3">
+          <iframe src="{{ details.map_url }}" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <p class="muted small">Нужна помощь с маршрутом? Свяжитесь с организатором — мы поможем проложить удобный маршрут.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Галерея удалена -->
+
+<!-- Section removed -->
+
+<!-- SECTION: RSVP -->
+<section id="rsvp" class="section section-rsvp bg-light">
+  <div class="container py-5">
+    <h2>Подтвердить участие</h2>
+    <div class="row mt-3">
+      <div class="col-md-8">
+        <form action="{{ url_for('rsvp') }}" method="post" class="card p-3">
+          <div class="mb-2">
+            <label class="form-label">Имя</label>
+            <input name="name" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Email (необязательно)</label>
+            <input name="email" class="form-control" type="email">
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Придёте ли вы?</label>
+            <select name="attending" class="form-select">
+              <option value="yes">Да</option>
+              <option value="no">Нет</option>
+            </select>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Количество гостей (включая вас)</label>
+            <input name="guests" class="form-control" type="number" min="0" value="1">
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Сообщение (необязательно)</label>
+            <textarea name="message" class="form-control" rows="3"></textarea>
+          </div>
+          <button class="btn btn-success">Отправить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: CONTACT -->
+<!-- Contact section removed -->
+
+{% endblock %}
