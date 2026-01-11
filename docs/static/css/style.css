@@ -63,7 +63,7 @@ body {
 
 
 /* Sections & scroll snapping */
-.section{ padding:4rem 0; }
+.section{ padding:2rem 0; }
 .section-hero{ min-height:80vh; display:flex; align-items:center; justify-content:center; }
 html, body { height:100%; }
 main{ scroll-behavior:smooth; }
@@ -99,7 +99,14 @@ main{ scroll-behavior:smooth; }
   font-size: 3.6rem;
 }
 .hero .lead{ color:var(--muted); }
-.hero .lead.lead-date{ color: #fff; font-size:1.25rem; margin-top:0.4rem; }
+.hero .lead.lead-date{
+  font-size:1.25rem; margin-top:0.4rem;
+  background: linear-gradient(90deg, #ffffff, #c5a6ac);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
 .lead{ color:var(--muted); }
 .card { border-radius: 12px; }
 .card { background: #fff; border: 1px solid rgba(var(--rgb-dark-pink),0.06); box-shadow: 0 8px 24px rgba(var(--rgb-dark-pink),0.04); }
@@ -143,7 +150,7 @@ footer { position: fixed; left: 0; right: 0; bottom: 0; background: #fff; paddin
 .btn-outline-light:hover{ color:#000; background: #fff }
 
 /* Section backgrounds and accents */
-.section { padding: 3.25rem 0; }
+.section { padding: 2rem 0; }
 .section.section-rsvp { background: linear-gradient(180deg, rgba(var(--rgb-light-pink),0.08), rgba(255,255,255,0)); }
 .section.section-details { background: transparent; }
 
@@ -171,7 +178,7 @@ footer { position: fixed; left: 0; right: 0; bottom: 0; background: #fff; paddin
 .section-details ul { text-align: left; margin: 0 auto; }
 
 /* Decorative separators */
-.section h2 { position: relative; display: inline-block; padding-bottom: 0.6rem; }
+.section h2 { position: relative; display: inline-block; padding-bottom: 0.6rem; font-weight:700; }
 .section h2:after { content: ''; display:block; height:3px; width:48px; background: linear-gradient(90deg, var(--color-light-pink), var(--color-dark-pink)); margin:8px auto 0; border-radius:3px; }
 
 /* Links and small text */
@@ -208,4 +215,10 @@ footer { border-top: 1px solid rgba(var(--rgb-light),0.06); }
   height: 100%;
   border: 0;
 }
+
+/* Make contact photo smaller */
+.contact-photo{ max-width: 140px; }
+
+/* Darken route help text */
+.route-help{ color: #2b2b2b; }
 
