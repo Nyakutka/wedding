@@ -101,7 +101,7 @@ main{ scroll-behavior:smooth; }
 .hero .lead{ color:var(--muted); }
 .hero .lead.lead-date{
   font-size:1.25rem; margin-top:0.4rem;
-  background: linear-gradient(90deg, #ffffff, #c5a6ac);
+  background: linear-gradient(90deg, #222222, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -221,6 +221,9 @@ footer { border-top: 1px solid rgba(var(--rgb-light),0.06); }
 
 /* Darken route help text */
 .route-help{ color: #2b2b2b; }
+
+/* Opening paragraph darker */
+.opening-text{ color: #2b2b2b; }
 
 /* Dress code notes darker */
 .dress-note{ color: #2b2b2b; }
