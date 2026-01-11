@@ -45,4 +45,39 @@ document.addEventListener('DOMContentLoaded', function(){
       offset: 100,
     });
   }
+
+  // Fallback/augmentation: add IntersectionObserver-driven reveals for all sections
+  // Target common elements inside sections (including hero) and also reveal whole sections
+  const revealSelectors = [
+    '.section h2',
+    '.section p',
+    '.section .row',
+    '.section img',
+    '.section .map-frame',
+    '.section .card',
+    '.section .btn-map'
+  ];
+  const revealTargets = Array.from(document.querySelectorAll(revealSelectors.join(',')));
+  const sectionTargets = Array.from(document.querySelectorAll('.section'));
+
+  // ensure targets have the animate class so CSS transitions apply
+  sectionTargets.forEach(s => s.classList.add('animate'));
+  revealTargets.forEach(el => el.classList.add('animate'));
+
+  const allTargets = Array.from(new Set([...sectionTargets, ...revealTargets]));
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { root: null, rootMargin: '0px', threshold: 0.08 });
+    allTargets.forEach(t => io.observe(t));
+  } else {
+    // fallback: make all visible
+    allTargets.forEach(t => t.classList.add('in-view'));
+  }
 });

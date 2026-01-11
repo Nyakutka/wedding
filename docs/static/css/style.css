@@ -4,6 +4,8 @@
   --color-light-pink: #c5a6ac;
   --accent: var(--color-dark-pink);
   --muted: var(--color-light);
+  /* animated gradient: light-pink -> white */
+  --section-gradient: linear-gradient(120deg, #fff0f2 0%, #fff6f8 45%, #ffffff 100%);
 }
 /* RGB helpers for translucent borders/shadows */
 :root{
@@ -39,6 +41,12 @@ body {
   line-height: 1.5;
   color: #222;
   background: #fff6f8;
+}
+/* subtle animated shift for section backgrounds */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 .hero{
   background-image: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6));
@@ -98,9 +106,27 @@ main{ scroll-behavior:smooth; }
   margin-bottom:0.5rem;
   font-size: 3.6rem;
 }
+
+.hero .display-4 {
+  /* same volumetric shadow as the date for consistency */
+  text-shadow:
+    0 12px 22px rgba(0,0,0,0.36),
+    0 4px 8px rgba(0,0,0,0.18),
+    0 1px 0 rgba(255,255,255,0.5);
+}
 .hero .lead{ color:var(--muted); }
 .hero .lead.lead-date{
-  font-size:1.25rem; margin-top:0.4rem; color: #2b2b2b; font-weight:700;
+  font-size: clamp(1.1rem, 4.5vw, 1.8rem);
+  margin-top:0.4rem;
+  color: #ffffff;
+  font-weight:800;
+  letter-spacing: 0.01em;
+  /* black shadow for depth */
+  text-shadow:
+    0 12px 22px rgba(0,0,0,0.36),
+    0 4px 8px rgba(0,0,0,0.18),
+    0 1px 0 rgba(255,255,255,0.5);
+  -webkit-font-smoothing: antialiased;
 }
 .lead{ color:var(--muted); }
 .card { border-radius: 12px; }
@@ -115,7 +141,7 @@ h1, h2, h3, h4, h5, h6, .display-4 {
 
 /* Center content blocks site-wide, but keep details section left-aligned */
 .section { text-align: center; }
-.section > .container { display: flex; flex-direction: column; align-items: center; }
+.section > .container { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; }
 .section .row { width: 100%; }
 .section-details > .container { display: block; text-align: center; }
 .section-details .row { align-items: center; }
@@ -149,28 +175,79 @@ footer { position: static; left: auto; right: auto; bottom: auto; background: tr
 .section.section-rsvp { background: linear-gradient(180deg, rgba(var(--rgb-light-pink),0.08), rgba(255,255,255,0)); }
 .section.section-details { background: transparent; }
 
-/* Contacts section: subtle white -> pink gradient matching site accents */
-.section.section-contacts, .section-contacts.bg-light {
-  background: linear-gradient(180deg, #ffffff 0%, #fff6f8 100%);
+/* Restore per-section soft white->pink gradient (as before) */
+.section:not(.section-hero) {
+  /* animated diagonal gradient from white -> light pink */
+  background: var(--section-gradient);
+  background-size: 240% 240%;
+  /* slow smooth shift between gradient positions */
+  animation: gradientShift 16s ease-in-out infinite;
 }
+
+/* Decorative semi-transparent branches overlay for non-hero sections */
+.section:not(.section-hero) {
+  position: relative;
+  overflow: hidden;
+}
+.section:not(.section-hero)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* light branches SVG encoded as data URI (subtle, low-contrast) */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='600' viewBox='0 0 1200 600'><defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='%23fff0f2'/><stop offset='1' stop-color='white'/></linearGradient></defs><g fill='none' stroke='%239e585d' stroke-opacity='0.12' stroke-linecap='round' stroke-linejoin='round' stroke-width='4'><path d='M50 200 C150 120, 300 120, 420 200 S700 340, 900 240' /><path d='M120 260 C220 180, 360 180, 480 260 S760 400, 960 300' /></g></svg>");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 120% auto;
+  opacity: 0.12;
+  pointer-events: none;
+  transform-origin: center;
+  z-index: 1;
+  animation: branchesSway 14s ease-in-out infinite;
+}
+
+@keyframes branchesSway {
+  0% { transform: translateX(-3%) rotate(-0.4deg); }
+  50% { transform: translateX(3%) rotate(0.4deg); }
+  100% { transform: translateX(-3%) rotate(-0.4deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section:not(.section-hero)::before { animation: none; }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .section:not(.section-hero) { animation: none !important; }
+}
+
+/* Removed special-case contacts selector; contacts now uses the same
+  section gradient as Dress Code and other sections. */
 
 /* Map buttons and frame */
 .map-buttons{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
 .btn-map {
-  background: var(--color-dark-pink);
+  background: linear-gradient(180deg, #c77f84 0%, #a34e55 100%);
   color: #fff;
-  border: 2px solid var(--color-dark-pink);
-  padding: .5rem 0.9rem;
+  border: 0;
+  padding: .6rem 1rem;
   flex: 0 0 220px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  border-radius: 8px;
+  border-radius: 12px;
+  /* softer, less bright shadow */
+  box-shadow: 0 10px 22px rgba(var(--rgb-dark-pink),0.12), inset 0 -6px 12px rgba(255,255,255,0.6);
+  transform: translateZ(0);
+  transition: transform 160ms cubic-bezier(.2,.9,.3,1), box-shadow 160ms ease, filter 160ms ease;
 }
-.btn-map:hover { background: #8b3f43; border-color: #8b3f43; color: #fff; }
+.btn-map:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 18px 36px rgba(var(--rgb-dark-pink),0.14), inset 0 -6px 14px rgba(255,255,255,0.7);
+  filter: saturate(1.04);
+}
 
-.map-wrapper { background: var(--color-dark-pink); padding: 8px; border-radius: 10px; }
+.map-wrapper { background: transparent; padding: 8px; border-radius: 10px; }
 .map-frame { background: #fff; border-radius: 6px; overflow: hidden; }
 .map-frame iframe { width: 100%; height: 320px; border: 0; display: block; }
 
@@ -227,4 +304,14 @@ footer { border-top: none; }
 
 /* Dress code notes darker */
 .dress-note{ color: #2b2b2b; }
+
+/* Make dress-code image scalable/responsive */
+.section-dresscode img, .section-dresscode .img-fluid {
+  width: 100%;
+  height: auto;
+  max-width: 480px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
