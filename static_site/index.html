@@ -1,13 +1,44 @@
-{% extends 'layout.html' %}
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Приглашение — Никита & Кира</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts (install New Rome Trial and Lighthaus on the server or provide @font-face) -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- AOS animation library -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent position-fixed w-100 z-top">
+      <div class="container">
+        <a class="navbar-brand text-white fw-bold" href="#home">Никита & Кира</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto" id="main-nav">
+            <li class="nav-item"><a class="nav-link text-white" href="#details">Детали</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-{% block content %}
+    <main>
+      
+        
+      
+
+      
 
 <!-- SECTION: HERO -->
-<section id="home" class="section section-hero hero-hero" data-aos="fade" style="background-image: url('{{ url_for('static', filename='uploads/kira_nikita_hat.jpg') }}')">
+<section id="home" class="section section-hero hero-hero" data-aos="fade" style="background-image: url('/static/uploads/kira_nikita_hat.jpg')">
   <div class="hero-overlay"></div>
   <div class="container hero text-center">
-    <h1 class="display-4">{{ couple.groom }} &amp; {{ couple.bride }}</h1>
-    <p class="lead">{{ date }} — Приглашаем вас разделить с нами этот день</p>
+    <h1 class="display-4">Никита &amp; Кира</h1>
+    <p class="lead">09.08.2026 — Приглашаем вас разделить с нами этот день</p>
     <div class="mt-4">
       <a class="btn btn-light btn-lg me-2" href="#details">Детали</a>
     </div>
@@ -33,16 +64,16 @@
     <div class="row">
       <div class="col-md-6 align-items-center">
         <ul class="list-unstyled">
-          <li><strong>Дата:</strong> {{ date }}</li>
-          <li><strong>Время:</strong> {{ details.time }}</li>
-          <li><strong>Место:</strong> {{ details.venue_name }}</li>
+          <li><strong>Дата:</strong> 09.08.2026</li>
+          <li><strong>Время:</strong> 16:00</li>
+          <li><strong>Место:</strong> Vinity Amore</li>
           <li class="mt-2">
-            <a class="btn btn-map me-2" href="{{ details.yandex_link }}" target="_blank" rel="noopener">Открыть в Яндекс.Картах</a>
-            <a class="btn btn-map me-2" href="{{ details.google_link }}" target="_blank" rel="noopener">Открыть в Google.Картах</a>
-            <a class="btn btn-map" href="{{ details.two_gis_link }}" target="_blank" rel="noopener">Открыть в 2GIS</a>
+            <a class="btn btn-map me-2" href="https://yandex.ru/maps/-/CLdqNUnO" target="_blank" rel="noopener">Открыть в Яндекс.Картах</a>
+            <a class="btn btn-map me-2" href="https://maps.app.goo.gl/QHFW24mnW7KfUTzd9" target="_blank" rel="noopener">Открыть в Google.Картах</a>
+            <a class="btn btn-map" href="https://go.2gis.com/n9mH2" target="_blank" rel="noopener">Открыть в 2GIS</a>
           </li>
           <li><strong>Адрес:</strong> Ленинградская область, Ломоносовский район, Лопухинское сельское поселение, урочище Новые Медуши, 4</li>
-          <li><strong>Парковка:</strong> {{ details.parking }}</li>
+          <li><strong>Парковка:</strong> Парковка доступна на территории клуба. Рекомендуем подъезжать со стороны главной дороги и следовать указателям.</li>
         </ul>
       </div>
       <div class="col-md-6">
@@ -72,7 +103,7 @@
     <p>По всем вопросам вы можете обращаться к нашему организатору - Дарье</p>
     <div class="row g-3 align-items-center mt-3">
       <div class="col-12 col-md-3 text-center">
-        <img src="{{ url_for('static', filename='uploads/dasha.jpg') }}" alt="Дарья" class="img-fluid rounded shadow-sm">
+        <img src="/static/uploads/dasha.jpg" alt="Дарья" class="img-fluid rounded shadow-sm">
       </div>
       <div class="col-12 col-md-9">
         <div class="row">
@@ -97,4 +128,15 @@
 <!-- SECTION: CONTACT -->
 <!-- Contact section removed -->
 
-{% endblock %}
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="/static/js/main.js"></script>
+  </body>
+  <footer class="text-center mt-5 mb-3 small text-muted">
+    <div class="container"></div>
+  </footer>
+</html>
