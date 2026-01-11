@@ -1,0 +1,211 @@
+:root{
+  --color-light: #bababa;
+  --color-dark-pink: #9e585d;
+  --color-light-pink: #c5a6ac;
+  --accent: var(--color-dark-pink);
+  --muted: var(--color-light);
+}
+/* RGB helpers for translucent borders/shadows */
+:root{
+  --rgb-light: 186,186,186; /* #bababa */
+  --rgb-dark-pink: 158,88,93; /* #9e585d */
+  --rgb-light-pink: 197,166,172; /* #c5a6ac */
+}
+/* Local fonts: put font files in static/fonts/ as .woff2/.woff
+   Expected filenames:
+     static/fonts/NewRomeTrial-Regular.woff2
+     static/fonts/Lighthaus-Regular.woff2
+*/
+@font-face {
+  font-family: 'New Rome Trial';
+  src: url('static/fonts/NewRomeTrial-Regular.woff2') format('woff2'),
+       url('static/fonts/NewRomeTrial-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lighthaus';
+  src: url('static/fonts/Lighthaus-Regular.woff2') format('woff2'),
+       url('static/fonts/Lighthaus-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+body {
+  padding-bottom: 80px;
+  font-family: 'Poiret One', 'Lighthaus', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #222;
+  background: #fffaf8;
+}
+.hero{
+  background-image: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6));
+  padding: 3.5rem 0;
+  text-align: center;
+}
+.hero-hero{ position:relative; background-size:cover; background-position:center; padding:7rem 0 5rem; }
+.hero-hero .hero-overlay{ position:absolute; inset:0; background:linear-gradient(rgba(9,9,9,0.45), rgba(9,9,9,0.35)); }
+.hero-hero .hero-overlay{ background: linear-gradient(rgba(var(--rgb-dark-pink),0.32), rgba(255,255,255,0.06)); }
+.hero-hero .hero{ position:relative; color:#fff; z-index:2; }
+.hero-hero .display-4{ font-size:3.2rem; color:#fff; }
+.btn-outline-light{ border-color: rgba(255,255,255,0.8); color:#fff }
+.btn-outline-light:hover{ color:#000; background:#fff }
+.z-top{ z-index:1050; }
+
+/* gallery preview */
+.gallery-preview img{ height:120px; object-fit:cover; width:100%; }
+
+/* Carousel preview tweaks */
+.gallery-preview .carousel-item img{ height:180px; object-fit:cover; }
+.gallery-preview .carousel { border-radius: 8px; overflow: hidden; }
+
+
+/* Sections & scroll snapping */
+.section{ padding:4rem 0; }
+.section-hero{ min-height:80vh; display:flex; align-items:center; justify-content:center; }
+html, body { height:100%; }
+main{ scroll-behavior:smooth; }
+
+/* optional scroll-snap for desktop */
+@media (min-width: 768px){
+  body { scroll-snap-type: y proximity; }
+  .section{ scroll-snap-align: start; }
+}
+
+/* navbar adjustments when over hero */
+.navbar.scrolled{ background: #9e585d !important; }
+.navbar.scrolled .nav-link, .navbar.scrolled .navbar-brand{ color:#fff !important; }
+
+/* Simple entrance animations */
+.animate { opacity: 0; transform: translateY(18px); transition: opacity 520ms cubic-bezier(.22,.9,.27,1), transform 520ms cubic-bezier(.22,.9,.27,1); }
+.animate.in-view { opacity: 1; transform: translateY(0); }
+.fade-left { transform: translateX(-18px); }
+.fade-right { transform: translateX(18px); }
+.scale-up { transform: scale(.98); }
+
+/* small delays for stagger */
+.stagger-1 { transition-delay: 0.06s; }
+.stagger-2 { transition-delay: 0.12s; }
+.stagger-3 { transition-delay: 0.18s; }
+
+
+
+.hero .display-4{
+  font-family: 'Poiret One', 'New Rome Trial', 'Playfair Display', serif;
+  font-weight:700;
+  margin-bottom:0.5rem;
+  font-size: 3.6rem;
+}
+.hero .lead{ color:var(--muted); }
+.hero .lead.lead-date{ color: #fff; font-size:1.25rem; margin-top:0.4rem; }
+.lead{ color:var(--muted); }
+.card { border-radius: 12px; }
+.card { background: #fff; border: 1px solid rgba(var(--rgb-dark-pink),0.06); box-shadow: 0 8px 24px rgba(var(--rgb-dark-pink),0.04); }
+.display-4 { font-weight: 600; }
+
+/* Apply New Rome Trial to all headings for consistent look */
+/* Use Poiret One for headings */
+h1, h2, h3, h4, h5, h6, .display-4 {
+  font-family: 'Poiret One', 'New Rome Trial', 'Playfair Display', serif;
+}
+
+/* Center content blocks site-wide, but keep details section left-aligned */
+.section { text-align: center; }
+.section > .container { display: flex; flex-direction: column; align-items: center; }
+.section .row { width: 100%; }
+.section-details > .container { display: block; text-align: left; }
+.section-details .row { align-items: center; }
+
+/* RSVP form centering */
+.section-rsvp .row { justify-content: center; }
+
+@media (max-width: 576px) {
+  body { font-size: 16px; }
+  .hero .display-4 { font-size: 2.4rem; }
+}
+footer { position: fixed; left: 0; right: 0; bottom: 0; background: #fff; padding: 8px 0; }
+.wishlist-img{ width:100%; height:200px; object-fit:cover; border-top-left-radius:12px; border-top-right-radius:12px; }
+.wishlist-card .card-body{ min-height:150px; }
+.gift-desc{ color:var(--muted); }
+.muted { color: var(--muted); }
+
+/* Buttons and accents */
+.btn-outline-primary{ border-color: var(--color-light-pink); color: var(--color-dark-pink); }
+.btn-outline-primary:hover{ background: var(--color-dark-pink); color: #fff; border-color: var(--color-dark-pink); }
+.btn-accent{ background: var(--color-dark-pink); color: #fff; border: 0; box-shadow: 0 8px 20px rgba(var(--rgb-dark-pink),0.12); }
+.text-accent{ color: var(--accent); }
+
+/* Light button variants */
+.btn-light { background: #fff; color: var(--color-dark-pink); border: 1px solid rgba(var(--rgb-light-pink),0.18); }
+.btn-outline-light{ border-color: rgba(255,255,255,0.8); color:#fff }
+.btn-outline-light:hover{ color:#000; background: #fff }
+
+/* Section backgrounds and accents */
+.section { padding: 3.25rem 0; }
+.section.section-rsvp { background: linear-gradient(180deg, rgba(var(--rgb-light-pink),0.08), rgba(255,255,255,0)); }
+.section.section-details { background: transparent; }
+
+/* Map buttons and frame */
+.map-buttons{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.btn-map {
+  background: var(--color-dark-pink);
+  color: #fff;
+  border: 2px solid var(--color-dark-pink);
+  padding: .5rem 0.9rem;
+  flex: 0 0 220px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 8px;
+}
+.btn-map:hover { background: #8b3f43; border-color: #8b3f43; color: #fff; }
+
+.map-wrapper { background: var(--color-dark-pink); padding: 8px; border-radius: 10px; }
+.map-frame { background: #fff; border-radius: 6px; overflow: hidden; }
+.map-frame iframe { width: 100%; height: 320px; border: 0; display: block; }
+
+/* Ensure details list remains left-aligned inside centered container */
+.section-details ul { text-align: left; margin: 0 auto; }
+
+/* Decorative separators */
+.section h2 { position: relative; display: inline-block; padding-bottom: 0.6rem; }
+.section h2:after { content: ''; display:block; height:3px; width:48px; background: linear-gradient(90deg, var(--color-light-pink), var(--color-dark-pink)); margin:8px auto 0; border-radius:3px; }
+
+/* Links and small text */
+a { color: var(--color-dark-pink); }
+a:hover { color: var(--color-dark-pink); text-decoration: none; }
+
+/* Form and button spacing for touch */
+.form-control, .form-select, .btn { min-height:44px; }
+
+/* Footer subtle border */
+footer { border-top: 1px solid rgba(var(--rgb-light),0.06); }
+
+@media (max-width: 576px) {
+  .display-4 { font-size: 2rem; }
+  .wishlist-img{ height:160px; }
+  .btn-map{ flex: 0 0 100%; max-width: 320px; }
+}
+
+/* Responsive map iframe */
+.map-responsive {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+.map-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
